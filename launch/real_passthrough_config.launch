@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
+        <arg name="manager" value="vlp16_manager" />
+        <arg name="frame_id" value="vlp16_frame"/>
+        <arg name="rpm" value="300"/>
+    </include>
+
+    <node pkg="passthrough_config" type="passthrough_config" name="passthrough_config" output="screen">
+        <param name="save_config_path" type="string" value="$(find passthrough_config)/config"/>
+    </node>
+    
+    
+    <node pkg="rviz" type="rviz" name="rviz" respawn="false" output="screen" args="-d $(find passthrough_config)/rviz/passthrough_config.rviz" />
+</launch>
